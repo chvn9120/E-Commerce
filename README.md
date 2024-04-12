@@ -17,13 +17,6 @@ bun i
 bun run start
 ```
 
-## Chạy Project (Tôi chọn port 8080):\
-
-### Backend
-
-http://localhost:8080
-
-### Frontend:
 
 ```
 cd .. # Move to root respository
@@ -31,6 +24,18 @@ cd frontend
 bun install
 bun run dev
 ```
+
+*How to run both BE and FE*
+-> I dont know :? maybe docker :?
+
+## Chạy Project (Tôi chọn port 8080):
+
+### Backend
+
+http://localhost:8080
+
+### Frontend:
+
 
 http://localhost:3000
 http://localhost:3000/dashboard
