@@ -1,11 +1,13 @@
-import { Sequelize } from 'sequelize';
+import {Sequelize} from 'sequelize';
 import 'dotenv/config';
 import mysql from 'mysql2/promise';
 
+console.log(process.env.DB_NAME);
 
 const conn = await mysql.createConnection({
+    host: process.env.DB_HOST,
     user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD
+    password: process.env.DB_PASSWORD,
 });
 
 conn.query(`CREATE DATABASE IF NOT EXISTS ${process.env.DB_NAME};`);
@@ -24,4 +26,4 @@ sequelize.authenticate()
     .then(() => console.log('Connection has been established successfully.'))
     .catch((error) => console.error('Unable to connect to the database: ', error));
 
-export default sequelize; 
+export default sequelize;
