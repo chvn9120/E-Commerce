@@ -163,11 +163,11 @@ const datas = {
         },
         {
             role_id: 2,
-            permission: 1
+            permission: 2
         },
         {
             role_id: 3,
-            permission: 1
+            permission: 2
         },
     ]
 };

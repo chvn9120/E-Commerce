@@ -78,6 +78,39 @@ const GetLogout = async (req, res, next) => {
     res.status(200).json(req.session.loggedIn);
 };
 
+const PostRegister = async (req, res, next) => {
+    const salt = 10;
+    const { username, fullname, password, address, phoneNo, role_id } = req.body;
+    if (role_id !== undefined) {
+        // Add authorize
+    }
+    if (await User.findOne({ where: { username } })) {
+        res.status(402).json(`Username <b>"${username}"</b> is existed!`);
+        return;
+    }
+    bcrypt.hash(password, salt, async (err, hash) => {
+        if (err) {
+            console.error(err);
+            res.status(404).json(`Oops! Something went wrong in UserController!`);
+            return;
+        }
+        await User.create({
+            username,
+            fullname,
+            password: hash,
+            saltRounds: salt,
+            address,
+            phoneNo,
+        })
+            .then(() => res.status(200).json(`Account created successfully!`))
+            .catch((err) => {
+                console.error(err);
+                res.status(404).json(`Oops! Something went wrong in UserController!`);
+                return;
+            });
+    });
+};
+
 const PostLogin = async (req, res, next) => {
     const { username, password } = req.body;
     const currUser = await User.findOne({ where: { username } });
@@ -96,7 +129,7 @@ const PostLogin = async (req, res, next) => {
 };
 
 const userController = {
-    PostLogin, GetLogout, PostCart, PostOrder
+    PostLogin, GetLogout, PostCart, PostOrder, PostRegister
 };
 
 export default userController;
