@@ -1,9 +1,11 @@
 import sequelize from "../database/db.js";
 import { DataTypes } from "sequelize";
 
-import Product from "./ProductBase.js";
-import Store from "./StoreBase.js";
+import Product from "./Product.js";
+import Store from "./Store.js";
 import Voucher from "./Voucher.js";
+import Role from "./Role.js";
+import Permission from "./Permission.js";
 
 const StoreProduct = sequelize.define('StoreProduct ', {
     StoreId: {
@@ -39,7 +41,25 @@ const VoucherProduct = sequelize.define('VoucherProduct', {
     }
 });
 
+const RolePermission = sequelize.define('RolePermission', {
+    RoleId: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: Role,
+            key: 'id'
+        }
+    },
+    Permission: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: Permission,
+            key: 'id'
+        }
+    }
+});
+
 export const Associations = {
     StoreProduct,
-    VoucherProduct
+    VoucherProduct, 
+    RolePermission
 };

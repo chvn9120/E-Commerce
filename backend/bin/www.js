@@ -3,7 +3,6 @@ import debugModule from 'debug';
 import { createServer } from 'http';
 import 'dotenv/config';
 
-
 const debug = debugModule('q3:server');
 const port = normalizePort(process.env.PORT || '3000');
 

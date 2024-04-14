@@ -1,8 +1,17 @@
-import Store from "../../models/StoreBase.js";
-import User from "../../models/UserBase.js";
-import Product from "../../models/ProductBase.js";
-import Brand from "../../models/Brand.js";
-import Category from "../../models/Category.js";
+import { Op } from "sequelize";
+import bcrypt from "bcrypt";
+
+import Store from "./../../models/Store.js";
+import User from "./../../models/User.js";
+import Product from "./../../models/Product.js";
+import Brand from "./../../models/Brand.js";
+import Category from "./../../models/Category.js";
+import Role from "../../models/Role.js";
+import Permission from "../../models/Permission.js";
+
+import { Associations } from "../../models/Associations.js";
+
+import credentials from "./../../credentials.js";
 
 const datas = {
     users: [
@@ -123,22 +132,112 @@ const datas = {
             description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
             thumbnail_img: 'http://mo.sk/hivluwwar'
         },
+    ],
+    roles: [
+        {
+            title: 'admin',
+        },
+        {
+            title: 'sale'
+        },
+        {
+            title: 'user'
+        }
+    ],
+    permissions: [
+        {
+            route: '/protected'
+        },
+        {
+            route: '/users'
+        },
+    ],
+    role_permissions: [
+        {
+            role_id: 1,
+            permission: 1
+        },
+        {
+            role_id: 1,
+            permission: 2
+        },
+        {
+            role_id: 2,
+            permission: 1
+        },
+        {
+            role_id: 3,
+            permission: 1
+        },
     ]
 };
 
 const initData = async () => {
-    await User.findAndCountAll()
-        .then(result => {
+    await Role.findAndCountAll()
+        .then(async result => {
             if (!(result.count === 0 && result.rows.length === 0)) return;
-            const { users } = datas;
-            users.map(
-                async (user) => await User.create({
-                    username: user.fullname.toLowerCase().replace(" ", "_"),
-                    fullname: user.fullname,
-                    address: user.address,
-                    phoneNo: user.phoneNo
-                }));
+            const { roles } = datas;
+            for (const role of roles) {
+                await Role.create({ title: role.title });
+            }
         });
+    await Permission.findAndCountAll()
+        .then(async result => {
+            if (!(result.count === 0 && result.rows.length === 0)) return;
+            const { permissions } = datas;
+            for (const permission of permissions) {
+                await Permission.create({ route: permission.route });
+            }
+        });
+    await Associations.RolePermission.findAndCountAll()
+        .then(async result => {
+            if (!(result.count === 0 && result.rows.length === 0)) return;
+            const { role_permissions } = datas;
+            for (const r of role_permissions) {
+                await Associations.RolePermission.create({ RoleId: r.role_id, PermissionId: r.permission });
+            }
+        });
+    await User.findOne({
+        where: {
+            [Op.and]: {
+                username: credentials.defaultAccount.username,
+                role_id: 1
+            }
+        }
+    }).then(async result => {
+        if (result === null) {
+            bcrypt.hash(credentials.defaultAccount.password, credentials.defaultAccount.saltRounds, async (err, hash) => {
+                await User.create({
+                    username: credentials.defaultAccount.username,
+                    fullname: credentials.defaultAccount.fullname,
+                    password: hash,
+                    saltRounds: credentials.defaultAccount.saltRounds,
+                    address: credentials.defaultAccount.andress,
+                    phoneNo: credentials.defaultAccount.phoneNo,
+                    role_id: 1
+                });
+            });
+        }
+        await User.findAndCountAll()
+            .then(result => {
+                if (result.count > 2 && result.rows.length > 2) return;
+                const { users } = datas;
+                for (const user of users) {
+                    // const saltRounds = Math.floor(Math.random() * 20) + 10;
+                    const saltRounds = 10;
+                    bcrypt.hash(user.fullname.toLowerCase().replace(" ", "_"), saltRounds, async (err, hash) => {
+                        await User.create({
+                            username: user.fullname.toLowerCase().replace(" ", "_"),
+                            fullname: user.fullname,
+                            password: hash,
+                            saltRounds,
+                            address: user.address,
+                            phoneNo: user.phoneNo
+                        });
+                    });
+                }
+            });
+    });
     await Store.findAndCountAll()
         .then(result => {
             if (!(result.count === 0 && result.rows.length === 0)) return;

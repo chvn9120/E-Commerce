@@ -1,10 +1,12 @@
 import { Router } from 'express';
+import bcrypt from 'bcrypt';
 
-import Product from '../models/ProductBase.js';
-import Cart from './../models/CartBase.js';
+import Product from '../models/Product.js';
+import Cart from './../models/Cart.js';
 import CartItems from '../models/CartItems.js';
-import Order from '../models/OrderBase.js';
+import Order from '../models/Order.js';
 import OrderItems from '../models/OrderItems.js';
+import User from '../models/User.js';
 
 const router = Router();
 
@@ -70,6 +72,34 @@ router.post('/make-order', async (req, res, next) => {
       console.error(error);
       res.status(500).send('Oops! Something went wrong');
     });
+});
+
+router.get('/test', async (req, res, next) => {
+  res.status(200).json({ session: req.session, cookie: req.cookies });
+});
+
+router.get('/logout', async (req, res, next) => {
+  if (req.session.loggedIn) {
+    req.session.loggedIn = false;
+  }
+  res.status(200).json(req.session.loggedIn);
+});
+
+router.post('/login', async (req, res, next) => {
+  const { username, password } = req.body;
+  const currUser = await User.findOne({ where: { username } });
+  bcrypt.compare(password, currUser.password, (err, result) => {
+    if (err) { res.status(404).json(err); return; }
+    if (!result) {
+      res.status(404).json('Username or password is not matched!');
+      return;
+    }
+    req.session.loggedIn = true;
+    req.session.username = currUser.username;
+    res.cookie('loggedIn', true, { maxAge: 60 * 1_000 });
+    res.cookie('username', currUser.username);
+    res.status(200).json(`username: ${req.session.username}`);
+  });
 });
 
 export default router;

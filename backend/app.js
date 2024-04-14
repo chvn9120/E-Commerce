@@ -2,6 +2,8 @@ import createError from 'http-errors';
 import express from 'express';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
+import session from 'express-session';
+import 'dotenv/config';
 import initData from './public/data/seed.js';
 // Fix __dirname in ES module
 import path from 'path';
@@ -11,19 +13,22 @@ const __dirname = path.dirname(__filename);
 // import routes
 import indexRouter from './routes/index.js';
 import usersRouter from './routes/users.js';
+import protectedRouter from './routes/protected.js';
 // Import models 
 import sequelize from './database/db.js';
 import { Associations } from './models/Associations.js';
 import Brand from './models/Brand.js';
 import Category from './models/Category.js';
-import Order from './models/OrderBase.js';
+import Order from './models/Order.js';
 import OrderItems from './models/OrderItems.js';
-import Product from './models/ProductBase.js';
-import User from './models/UserBase.js';
-import Store from './models/StoreBase.js';
+import Product from './models/Product.js';
+import User from './models/User.js';
+import Store from './models/Store.js';
 import Voucher from './models/Voucher.js';
-import Cart from './models/CartBase.js';
+import Cart from './models/Cart.js';
 import CartItems from './models/CartItems.js';
+import Role from './models/Role.js';
+import Permission from './models/Permission.js';
 // Import associations
 // Brand - Product 
 Brand.hasMany(Product, { foreignKey: 'brand_id' });
@@ -55,9 +60,15 @@ Product.belongsTo(OrderItems, { foreignKey: 'product_id' });
 // Product - Voucher
 Voucher.belongsToMany(Product, { through: Associations.VoucherProduct });
 Product.belongsToMany(Voucher, { through: Associations.VoucherProduct });
-// Link all of thems
-sequelize.sync().then(() => initData());
+// Role - User
+Role.hasMany(User, { foreignKey: 'roleId' });
+User.belongsTo(Role, { foreignKey: 'roleId' });
+// Role - Permission
+Role.belongsToMany(Permission, { through: Associations.RolePermission });
+Permission.belongsToMany(Role, { through: Associations.RolePermission });
+// Link all of thems and
 // Seed sample data for project
+sequelize.sync().then(() => initData());
 
 // Start project
 const app = express();
@@ -68,9 +79,16 @@ app.set('view engine', 'hbs');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(session({
+  secret: process.env.SS_SECRET,
+  resave: false,
+  saveUninitialized: true,
+  cookie: { maxAge: 3 * 24 * 60 * 60 * 1_000 } // 3 days
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/protected', protectedRouter);
 app.use('/users', usersRouter);
 app.use('/', indexRouter);
 

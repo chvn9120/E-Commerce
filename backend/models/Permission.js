@@ -1,30 +1,23 @@
 import { Model, DataTypes } from 'sequelize';
-import Order from './OrderBase.js';
 import sequelize from '../database/db.js';
 
-class User extends Model { }
+class Permission extends Model { }
 
-User.init({
+Permission.init({
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    username: {
+    route: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    fullname: {
+    slug: {
         type: DataTypes.STRING,
-        allowNull: false
     },
-    address: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    phoneNo: {
-        type: DataTypes.TEXT,
-        allowNull: false
+    description: {
+        type: DataTypes.STRING
     },
     created_at: {
         type: DataTypes.DATE,
@@ -33,22 +26,13 @@ User.init({
     updated_at: {
         type: DataTypes.DATE
     },
-    updated_by: {
-        type: DataTypes.INTEGER
-    },
-    deleted_at: {
-        type: DataTypes.DATE
-    },
-    deleted_by: {
-        type: DataTypes.INTEGER
-    },
-    is_deleted: {
+    is_active: {
         type: DataTypes.BOOLEAN
     }
 }, {
     sequelize,
-    modelName: 'Users',
+    modelName: 'Permissions',
     timestamps: false
 });
 
-export default User;
+export default Permission;
