@@ -5,6 +5,7 @@ const router = Router();
 
 router.post('/checkout', userController.PostOrder);
 router.post('/make-order', userController.PostCart);
+router.post('/register', userController.PostRegister);
 router.get('/logout', userController.GetLogout);
 router.post('/login', userController.PostLogin);
 

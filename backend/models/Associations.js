@@ -49,7 +49,7 @@ const RolePermission = sequelize.define('RolePermission', {
             key: 'id'
         }
     },
-    Permission: {
+    PermissionId: {
         type: DataTypes.INTEGER,
         references: {
             model: Permission,
