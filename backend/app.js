@@ -7,7 +7,7 @@ import 'dotenv/config';
 import initData from './public/data/seed.js';
 // Fix __dirname in ES module
 import path from 'path';
-import {fileURLToPath} from 'url';
+import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -17,7 +17,7 @@ import usersRouter from './routes/users.js';
 import protectedRouter from './routes/protected.js';
 // Import models 
 import sequelize from './database/db.js';
-import {Associations} from './models/Associations.js';
+import { Associations } from './models/Associations.js';
 import Brand from './models/Brand.js';
 import Category from './models/Category.js';
 import Order from './models/Order.js';
@@ -32,32 +32,32 @@ import Role from './models/Role.js';
 import Permission from './models/Permission.js';
 // Import associations
 // Brand - Product 
-Brand.hasMany(Product, {foreignKey: 'brand_id'});
-Product.belongsTo(Brand, {foreignKey: 'brand_id'});
+Brand.hasMany(Product, { foreignKey: 'brand_id' });
+Product.belongsTo(Brand, { foreignKey: 'brand_id' });
 // Category - Product
-Category.hasMany(Product, {foreignKey: 'category_id'});
-Product.belongsTo(Category, {foreignKey: 'category_id'});
+Category.hasMany(Product, { foreignKey: 'category_id' });
+Product.belongsTo(Category, { foreignKey: 'category_id' });
 // Store - Product
-Store.belongsToMany(Product, {through: Associations.StoreProduct});
-Product.belongsToMany(Store, {through: Associations.StoreProduct});
+Store.belongsToMany(Product, { through: Associations.StoreProduct });
+Product.belongsToMany(Store, { through: Associations.StoreProduct });
 // Cart - User
-User.hasOne(Cart, {foreignKey: 'cart_of'});
-Cart.belongsTo(User, {foreignKey: 'cart_of'});
+User.hasOne(Cart, { foreignKey: 'cart_of' });
+Cart.belongsTo(User, { foreignKey: 'cart_of' });
 // Cart - CartItems
-Cart.hasMany(CartItems, {foreignKey: 'cart_id'});
-CartItems.belongsTo(Cart, {foreignKey: 'cart_id'});
+Cart.hasMany(CartItems, { foreignKey: 'cart_id' });
+CartItems.belongsTo(Cart, { foreignKey: 'cart_id' });
 // CartItems - Product
-CartItems.hasMany(Product, {foreignKey: 'product_id'});
-Product.belongsTo(CartItems, {foreignKey: 'product_id'});
+CartItems.hasMany(Product, { foreignKey: 'product_id' });
+Product.belongsTo(CartItems, { foreignKey: 'product_id' });
 // User - Order
-User.hasMany(Order, {foreignKey: 'order_by'});
-Order.belongsTo(User, {foreignKey: 'order_by'});
+User.hasMany(Order, { foreignKey: 'order_by' });
+Order.belongsTo(User, { foreignKey: 'order_by' });
 // Order - OrderItems
-Order.hasMany(OrderItems, {foreignKey: 'order_id'});
-OrderItems.belongsTo(Order, {foreignKey: 'order_id'});
+Order.hasMany(OrderItems, { foreignKey: 'order_id' });
+OrderItems.belongsTo(Order, { foreignKey: 'order_id' });
 // OrderItems - Product
-OrderItems.hasMany(Product, {foreignKey: 'product_id'});
-Product.belongsTo(OrderItems, {foreignKey: 'product_id'});
+OrderItems.hasMany(Product, { foreignKey: 'product_id' });
+Product.belongsTo(OrderItems, { foreignKey: 'product_id' });
 // Product - Voucher
 Voucher.belongsToMany(Product, { through: Associations.VoucherProduct });
 Product.belongsToMany(Voucher, { through: Associations.VoucherProduct });
@@ -82,6 +82,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+    secret: process.env.SS_SECRET,
+    resave: false,
+    saveUninitialized: true,
+}));
 
 app.use('/protected', protectedRouter);
 app.use('/users', usersRouter);
