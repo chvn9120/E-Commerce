@@ -7,6 +7,8 @@ import Order from '../models/Order.js';
 import OrderItems from '../models/OrderItems.js';
 import User from '../models/User.js';
 
+import isAdminstator from '../middlewares/IsAdministrator.js';
+
 const PostOrder = async (req, res, next) => {
     const { user_id, ship_fee, payment_method } = req.body;
     // Step 1: Calculate the total cart
@@ -81,17 +83,44 @@ const GetLogout = async (req, res, next) => {
 const PostRegister = async (req, res, next) => {
     const salt = 10;
     const { username, fullname, password, address, phoneNo, role_id } = req.body;
-    if (role_id !== undefined) {
-        // Add authorize
-    }
-    if (await User.findOne({ where: { username } })) {
-        res.status(402).json(`Username <b>"${username}"</b> is existed!`);
-        return;
-    }
+    // if (await User.findOne({ where: { username } })) {
+    //     res.status(400).json(`Username <b>"${username}"</b> is existed!`);
+    //     return;
+    // }
     bcrypt.hash(password, salt, async (err, hash) => {
         if (err) {
-            console.error(err);
+            console.error(`Line 92: ${err}`);
             res.status(404).json(`Oops! Something went wrong in UserController!`);
+            return;
+        }
+        if (role_id !== undefined) {
+            // Add authorize
+            /*
+             *Requirements:
+             - Have to logged in.
+             - Role "admin" can add user with new role only .
+             */
+            if (req.cookies.loggedIn && isAdminstator((await User.findOne({ where: { username: req.cookies.username } })).role_id)) {
+                await User.create({
+                    username,
+                    fullname,
+                    password: hash,
+                    saltRounds: salt,
+                    address,
+                    role_id,
+                    phoneNo,
+                })
+                    .then(() => res.status(200).json(`Account created successfully!`))
+                    .catch((err) => {
+                        console.error(`Line 116: ${err}`);
+                        res.status(404).json(`Oops! Something went wrong in UserController!`);
+                    });
+            } else {
+                const message = req.cookies.loggedIn
+                    ? `Unauthorized! You don't have permission to access this action!`
+                    : 'Unauthorized! Please login to access this route!';
+                res.status(401).json(message);
+            }
             return;
         }
         await User.create({
