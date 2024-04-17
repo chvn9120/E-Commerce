@@ -1,47 +1,87 @@
-import {Link} from "@nextui-org/link";
-import {Snippet} from "@nextui-org/snippet";
-import {Code} from "@nextui-org/code"
-import {button as buttonStyles} from "@nextui-org/theme";
-import {siteConfig} from "@/config/site";
-import {title, subtitle} from "@/components/primitives";
-import {GithubIcon} from "@/components/icons";
 import {Navbar} from "@/components/navbar";
+import Swiper from "@/components/swiper/swiper";
+import Breadcumb from "@/components/breadcrumbs/breadcumb";
+import MyCard from "@/components/filterbar/card";
+import React from "react";
+import Select from "@/components/filterbar/select";
+import ButtonGroup from "@/components/filterbar/button-group";
+import CardItem from "@/app/product-grid/card-items";
+import {Pagination} from "@nextui-org/react";
+import MyPagination from "@/app/product-grid/Pagination";
+// import MySelectItem from "@/components/filterbar/select-item";
+// import {BreadcrumbItem, Breadcrumbs} from "@nextui-org/react";
+
 
 export default function Home() {
     return (
-        <><Navbar/>
-            <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-                <div className="inline-block max-w-lg text-center justify-center">
-                    <h1 className={title()}>Make&nbsp;</h1>
-                    <h1 className={title({color: "violet"})}>beautiful&nbsp;</h1>
-                    <br/>
-                    <h1 className={title()}>
-                        websites regardless of your design experience.
-                    </h1>
-                    <h2 className={subtitle({class: "mt-4"})}>
-                        Beautiful, fast and modern React UI library.
-                    </h2>
+        <div>
+            <Navbar/>
+
+
+            <div className="flex items-center justify-center">
+                <Swiper/>
+            </div>
+
+            <div className={"ml-12 mt-10"}>
+                <Breadcumb/>
+            </div>
+
+            <div className="flex items-center justify-center"
+                 style={{marginTop: '20px'}}
+            >
+                <MyCard>
+                    <ButtonGroup/>
+
+                    <Select>
+                        {/*<MySelectItem>*/}
+                        {/*    /!* You can pass children here *!/*/}
+                        {/*    <p>Child content</p>*/}
+                        {/*</MySelectItem>*/}
+                    </Select>
+                </MyCard>
+            </div>
+
+            {/*Grid of Product*/}
+            <div className={"flex place-content-center"}>
+                <div className="grid gap-4 grid-cols-5 grid-rows-2">
+                    <CardItem>
+                        <h1>
+                            Paris
+                        </h1>
+                        <p>Price: 123$</p>
+                    </CardItem>
+
+                    <CardItem>
+                        <p>Product 2</p>
+                    </CardItem>
+
+                    <CardItem>
+                        <p>Product 3</p>
+                    </CardItem>
+
+                    <CardItem>
+                        <p>Product 4</p>
+
+                    </CardItem>
+
+                    <CardItem>
+                        <p>Product 5</p>
+
+                    </CardItem>
+
+                    <CardItem>
+                        <p>Product 6</p>
+                    </CardItem>
                 </div>
 
-                <div className="flex gap-3">
-                    <Link
-                        isExternal
-                        className={buttonStyles({variant: "bordered", radius: "full"})}
-                        href={siteConfig.links.github}
-                    >
-                        <GithubIcon size={20}/>
-                        GitHub
-                    </Link>
-                </div>
+            </div>
 
-                <div className="mt-8">
-                    <Snippet hideSymbol hideCopyButton variant="flat">
-                    <span>
-                        Get started by editing <Code color="primary">app/page.tsx</Code>
-                    </span>
-                    </Snippet>
-                </div>
-            </section>
-        </>
+            <div className="flex items-center justify-center"
+                 style={{marginTop: '20px'}}
+            >
+                <MyPagination/>
+            </div>
+
+        </div>
     );
 }
