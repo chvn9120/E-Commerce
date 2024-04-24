@@ -1,3 +1,5 @@
+'use client'; // This is a comment
+
 import {
   Avatar,
   Dropdown,

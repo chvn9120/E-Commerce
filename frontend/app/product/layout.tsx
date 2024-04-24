@@ -1,14 +1,15 @@
-import {Navbar} from "@/components/navbar";
+import {NavbarWrapper} from "@/components/navbar/navbar";
+import React from "react";
 
-export default function PricingLayout({
+export default function ProductLayout({
                                           children,
                                       }: {
     children: React.ReactNode;
 }) {
     return (
-        <><Navbar/>
+        <><NavbarWrapper/>
             <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-                <div className="inline-block max-w-lg text-center justify-center">
+                <div className="text-center justify-center">
                     {children}
                 </div>
             </section>

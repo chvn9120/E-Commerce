@@ -42,7 +42,7 @@ export default () => {
         //
         // </Swiper>
 
-        <div >
+        <div className="overflow-visible p-2">
             <SwiperComponent images={images}/>
         </div>
     );

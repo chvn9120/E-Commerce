@@ -14,6 +14,7 @@ interface SwiperComponentProps {
 const SwiperComponent: React.FC<SwiperComponentProps> = ({images}) => {
     return (
         <Swiper
+            className="overflow-visible"
             style={{width: '800px', height: '300px'}}
             modules={[Navigation, Pagination, Scrollbar, A11y]}
             spaceBetween={50}
@@ -25,8 +26,9 @@ const SwiperComponent: React.FC<SwiperComponentProps> = ({images}) => {
             onSlideChange={() => console.log('slide change')}
         >
             {images.map((image, index) => (
-                <SwiperSlide key={index}>
+                <SwiperSlide className="" key={index}>
                     <Image
+                        className="overflow-visible"
                         isBlurred
                         isZoomed
                         // width={240}

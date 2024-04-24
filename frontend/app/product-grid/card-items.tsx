@@ -8,6 +8,7 @@ import {SearchIcon} from "@/components/icons";
 import {CartIcon} from "@nextui-org/shared-icons";
 import {ProductsIcon} from "@/components/icons/sidebar/products-icon";
 import {InfoIcon} from "@/components/icons/accounts/info-icon";
+import Link from "next/link";
 
 interface CardProps {
     children: React.ReactNode;
@@ -16,38 +17,40 @@ interface CardProps {
 
 const CardItem: React.FC<CardProps> = ({children}) => {
     return (
-        <Card
-            style={{}}
-        >
+        <Card className="overflow-visible">
             {/*<CardHeader>Card Header</CardHeader>*/}
 
-            <CardBody>
+            <CardBody className="overflow-visible">
                 <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                    <Image src={'/src/img.png'}
-                           style={{width: '200px', height: '200px'}}
-                           isBlurred
-                           isZoomed
+                    <Image
+                        className="overflow-visible"
+                        src={'/src/img.png'}
+                        style={{width: '200px', height: '200px'}}
+                        isBlurred
+                        isZoomed
                     >
 
                     </Image>
 
                 </div>
+
                 <div>
+
+
                     {children}
                 </div>
             </CardBody>
 
             <CardFooter className={"space-x-4"}>
 
-            <Button isIconOnly>
+                <Button isIconOnly>
                     <CartIcon/>
                 </Button>
-                <Button isIconOnly>
-                    <InfoIcon/>
-                </Button>
+
+                <Link href={'/product'}>
+                    <Button isIconOnly={true} startContent={<ProductsIcon/>}/>
+                </Link>
             </CardFooter>
-
-
         </Card>
     );
 };
