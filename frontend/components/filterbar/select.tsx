@@ -16,16 +16,23 @@ let prices = [
 const MySelect: React.FC<SelectProps> = ({children}) => {
     // @ts-ignore
     return (
-        <Select
-            label="Giá"
-            className="max-w-xs">
-            {/*Selection Items Maps*/}
-            {prices.map((price, index) => (
-                <SelectItem key={index} value={price}>
-                    {price}
-                </SelectItem>
-            ))}
-        </Select>
+        <div>
+            {/**/}
+
+            <Select
+                label="Giá"
+                className="w-48">
+                {/*Selection Items Maps*/}
+                {prices.map((price, index) => (
+                    <SelectItem key={index} value={price}>
+                        {price}
+                    </SelectItem>
+                ))}
+            </Select>
+
+
+        </div>
+
     );
 }
 

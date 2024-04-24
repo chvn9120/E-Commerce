@@ -16,6 +16,22 @@ Permission.init({
     slug: {
         type: DataTypes.STRING,
     },
+    can_create: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
+    },
+    can_read: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true
+    },
+    can_update: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
+    },
+    can_delete: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
+    },
     description: {
         type: DataTypes.STRING
     },

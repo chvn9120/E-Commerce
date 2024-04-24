@@ -14,7 +14,7 @@ interface SwiperComponentProps {
 const SwiperComponent: React.FC<SwiperComponentProps> = ({images}) => {
     return (
         <Swiper
-            className="overflow-visible"
+            className="z-20"
             style={{width: '800px', height: '300px'}}
             modules={[Navigation, Pagination, Scrollbar, A11y]}
             spaceBetween={50}

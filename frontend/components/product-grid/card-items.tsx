@@ -41,14 +41,15 @@ const CardItem: React.FC<CardProps> = ({children}) => {
                 </div>
             </CardBody>
 
-            <CardFooter className={"space-x-4"}>
+            <CardFooter className="space-x-4 flex content-center justify-end">
 
                 <Button isIconOnly>
                     <CartIcon/>
                 </Button>
 
-                <Link href={'/product'}>
-                    <Button isIconOnly={true} startContent={<ProductsIcon/>}/>
+                <Link
+                    href={'/product'}>
+                    <Button isIconOnly={true} startContent={<InfoIcon/>}/>
                 </Link>
             </CardFooter>
         </Card>

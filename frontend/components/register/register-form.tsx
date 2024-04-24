@@ -6,11 +6,11 @@ import React from "react";
 import {GithubIcon, TwitterIcon} from "@/components/icons";
 
 const defaultSignFormData = {
-    username: 'wangly19',
-    password: 'nextui.org',
+    username: 'Ecommerse',
+    password: '',
 };
 
-export const LoginForm: React.FC = () => {
+export const RegisterForm: React.FC = () => {
 
     // @ts-ignore
     return (
@@ -49,16 +49,30 @@ export const LoginForm: React.FC = () => {
                             onValueChange={handleChange}
                             onBlur={handleBlur}
                         />
-                        <Spacer y={2}/>
+                        <Spacer y={3}/>
 
+                        {/*Phone number*/}
+                        <Input
+                            isRequired
+                            size={"lg"}
+                            name="phone"
+                            labelPlacement={"outside"}
+                            placeholder="phone: 1234567890"
+                            // value={values?.phone}
+                            // label={errors?.phone || 'Phone'}
+                            onValueChange={handleChange}
+                            onBlur={handleBlur}
+                        />
+                        <Spacer y={3}/>
 
+                        {/*Password*/}
                         <Input
                             isRequired
                             name="password"
                             type={"password"}
                             // shadow={false}
                             size={"lg"}
-                            placeholder="password: nextui.org"
+                            placeholder=""
                             // labelLeft={<Password set="bold"/>}
                             value={values?.password}
                             labelPlacement={"outside"}
@@ -68,13 +82,27 @@ export const LoginForm: React.FC = () => {
                             onValueChange={handleChange}
                             onBlur={handleBlur}
                         />
+                        <Spacer y={3}/>
+
+                        {/*Recheck input  */}
+                        <Input
+                            isRequired
+                            name="repassword"
+                            type={"password"}
+                            // shadow={false}
+                            size={"lg"}
+                            placeholder="re-enter password"
+                            // labelLeft={<Password set="bold"/>}
+                            value={values?.password}
+                            labelPlacement={"outside"}
+
+                            // status={errors?.password ? 'error' : undefined}
+                            label={errors?.password || 'Re-enter Password'}
+                            onValueChange={handleChange}
+                            onBlur={handleBlur}
+                        />
                         <Spacer y={1}/>
 
-                        <div className="flex justify-between">
-                            <Checkbox>Remember me</Checkbox>
-
-                            <Link color="primary">Forget Password?</Link>
-                        </div>
 
                         <Spacer y={1}/>
                         <Button
@@ -83,14 +111,14 @@ export const LoginForm: React.FC = () => {
                             size="lg"
                             color="primary"
                         >
-                            Sign In
+                            Sign up
                         </Button>
 
                         {/* Dont have account */}
                         <Spacer y={1}/>
                         <div className="flex-row justify-center">
-                            <span>Don't have an account? </span>
-                            <Link href={"/register"} color="primary">Sign up</Link>
+                            <span>Already have an account? </span>
+                            <Link href={"/login"} color="primary">Sign in</Link>
                         </div>
 
                     </form>

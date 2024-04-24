@@ -29,6 +29,7 @@ import {
     SearchIcon,
 } from "@/components/icons";
 import {CartDropdown} from "./cart";
+import {ThemeSwitch} from "@/components/theme-switch";
 
 
 interface Props {
@@ -102,10 +103,60 @@ export const NavbarWrapper = ({children}: Props) => {
 
                 {/*    <p>123</p>*/}
                 {/*</NavbarContent>*/}
+                {/*Search*/}
+                <NavbarContent
+                    className="hidden sm:flex basis-1/5 sm:basis-full"
+                    justify="end"
+                >
+                    <NavbarItem className="hidden sm:flex gap-2">
+                        {/*<Link isExternal href={siteConfig.links.github} aria-label="Github">*/}
+                        {/*    <GithubIcon className="text-default-500" />*/}
+                        {/*</Link>*/}
+                    </NavbarItem>
+                    <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
+                    <NavbarItem className="hidden md:flex">
+                    </NavbarItem>
+                </NavbarContent>
+
+                {/*<NavbarContent className="sm:hidden basis-1 pl-4" justify="end">*/}
+                {/*	<Link isExternal href={siteConfig.links.github} aria-label="Github">*/}
+                {/*		<GithubIcon className="text-default-500" />*/}
+                {/*	</Link>*/}
+                {/*	<ThemeSwitch />*/}
+                {/*	<NavbarMenuToggle />*/}
+                {/*</NavbarContent>*/}
+
+                <NavbarMenu>
+                    {searchInput}
+                    {/*<div className="mx-4 mt-2 flex flex-col gap-2">*/}
+                    {/*    {siteConfig.navMenuItems.map((item, index) => (*/}
+                    {/*        <NavbarMenuItem key={`${item}-${index}`}>*/}
+                    {/*            <Link*/}
+                    {/*                color={*/}
+                    {/*                    index === 2*/}
+                    {/*                        ? "primary"*/}
+                    {/*                        : index === siteConfig.navMenuItems.length - 1*/}
+                    {/*                            ? "danger"*/}
+                    {/*                            : "foreground"*/}
+                    {/*                }*/}
+                    {/*                href="#"*/}
+                    {/*                size="lg"*/}
+                    {/*            >*/}
+                    {/*                {item.label}*/}
+                    {/*            </Link>*/}
+                    {/*        </NavbarMenuItem>*/}
+                    {/*    ))}*/}
+                    {/*</div>*/}
+                </NavbarMenu>
+
+
                 <NavbarContent
                     justify="end"
                     className="w-fit data-[justify=end]:flex-grow-0"
                 >
+                    <ThemeSwitch />
+
+
                     {/*Cart item*/}
                     <CartDropdown/>
 

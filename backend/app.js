@@ -4,7 +4,7 @@ import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import session from 'express-session';
 import 'dotenv/config';
-import initData from './public/data/seed.js';
+import initData from './data/seed.js';
 // Fix __dirname in ES module
 import path from 'path';
 import { fileURLToPath } from 'url';

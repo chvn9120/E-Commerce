@@ -7,9 +7,9 @@ import MyCard from "@/components/filterbar/card";
 import React from "react";
 import Select from "@/components/filterbar/select";
 import ButtonGroup from "@/components/filterbar/button-group";
-import CardItem from "@/app/product-grid/card-items";
+import CardItem from "@/components/product-grid/card-items";
 import {Pagination} from "@nextui-org/react";
-import MyPagination from "@/app/product-grid/Pagination";
+import MyPagination from "@/components/product-grid/Pagination";
 import {NavbarWrapper} from "@/components/navbar/navbar";
 // import MySelectItem from "@/components/filterbar/select-item";
 // import {BreadcrumbItem, Breadcrumbs} from "@nextui-org/react";
@@ -24,7 +24,7 @@ export default function Home() {
             </NavbarWrapper>
 
 
-            <div className="flex items-center justify-center overflow-visible">
+            <div className="flex items-center justify-center ">
                 <Swiper/>
             </div>
 
