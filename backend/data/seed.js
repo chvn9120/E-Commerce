@@ -1,17 +1,17 @@
 import { Op } from "sequelize";
 import bcrypt from "bcrypt";
 
-import Store from "./../../models/Store.js";
-import User from "./../../models/User.js";
-import Product from "./../../models/Product.js";
-import Brand from "./../../models/Brand.js";
-import Category from "./../../models/Category.js";
-import Role from "../../models/Role.js";
-import Permission from "../../models/Permission.js";
+import Store from "./../models/Store.js";
+import User from "./../models/User.js";
+import Product from "./../models/Product.js";
+import Brand from "./../models/Brand.js";
+import Category from "./../models/Category.js";
+import Role from "../models/Role.js";
+import Permission from "../models/Permission.js";
 
-import { Associations } from "../../models/Associations.js";
+import { Associations } from "./../models/Associations.js";
 
-import credentials from "./../../credentials.js";
+import credentials from "./../credentials.js";
 
 const datas = {
     users: [
@@ -146,6 +146,23 @@ const datas = {
     ],
     permissions: [
         {
+            route: '/protected',
+            can_create: 1,
+            can_update: 1,
+            can_delete: 1
+        },
+        {
+            route: '/users',
+            can_create: 1,
+            can_update: 1,
+            can_delete: 1
+        },
+        {
+            route: '/users',
+            can_update: 1,
+            can_delete: 1
+        },
+        {
             route: '/protected'
         },
         {
@@ -163,11 +180,15 @@ const datas = {
         },
         {
             role_id: 2,
-            permission: 2
+            permission: 4
+        },
+        {
+            role_id: 2,
+            permission: 5
         },
         {
             role_id: 3,
-            permission: 2
+            permission: 3
         },
     ]
 };
@@ -186,7 +207,7 @@ const initData = async () => {
             if (!(result.count === 0 && result.rows.length === 0)) return;
             const { permissions } = datas;
             for (const permission of permissions) {
-                await Permission.create({ route: permission.route });
+                await Permission.create(permission);
             }
         });
     await Associations.RolePermission.findAndCountAll()

@@ -6,6 +6,10 @@ import CartItems from '../models/CartItems.js';
 import Order from '../models/Order.js';
 import OrderItems from '../models/OrderItems.js';
 import User from '../models/User.js';
+import Role from '../models/Role.js';
+import Permission from '../models/Permission.js';
+
+import isAdminstator from '../middlewares/IsAdministrator.js';
 
 const PostOrder = async (req, res, next) => {
     const { user_id, ship_fee, payment_method } = req.body;
@@ -81,17 +85,60 @@ const GetLogout = async (req, res, next) => {
 const PostRegister = async (req, res, next) => {
     const salt = 10;
     const { username, fullname, password, address, phoneNo, role_id } = req.body;
-    if (role_id !== undefined) {
-        // Add authorize
-    }
-    if (await User.findOne({ where: { username } })) {
-        res.status(402).json(`Username <b>"${username}"</b> is existed!`);
-        return;
-    }
+    // if (await User.findOne({ where: { username } })) {
+    //     res.status(400).json(`Username <b>"${username}"</b> is existed!`);
+    //     return;
+    // }
     bcrypt.hash(password, salt, async (err, hash) => {
         if (err) {
-            console.error(err);
+            console.error(`Line 92: ${err}`);
             res.status(404).json(`Oops! Something went wrong in UserController!`);
+            return;
+        }
+        if (role_id !== undefined) {
+            // Add authorize
+            /*
+             *Requirements:
+             - Have to logged in.
+             - Role "admin" can add user with new role only in that route.
+             */
+            const currUser = await User.findOne({ where: { username: req.cookies.username } });
+            const role = await Role.findOne({
+                where: { id: currUser.role_id },
+                include: [{
+                    model: Permission,
+                    attributes: ['route', 'can_create', 'can_read', 'can_update', 'can_delete']
+                }]
+            });
+            // Get the parent path to compare in database
+            const basePath = `/${req.originalUrl.split('/')[1]}`;
+            const permissionWithRoute = role.Permissions
+                .find(permission =>
+                    permission.route === basePath);
+            const allowedRoutes = role.Permissions.map(permission => permission.route);
+            if (req.cookies.loggedIn
+                && allowedRoutes.includes(basePath)
+                && permissionWithRoute.can_create) {
+                await User.create({
+                    username,
+                    fullname,
+                    password: hash,
+                    saltRounds: salt,
+                    address,
+                    role_id,
+                    phoneNo,
+                })
+                    .then(() => res.status(200).json(`Account created successfully!`))
+                    .catch((err) => {
+                        console.error(`Line 116: ${err}`);
+                        res.status(404).json(`Oops! Something went wrong in UserController!`);
+                    });
+            } else {
+                const message = req.cookies.loggedIn
+                    ? `Unauthorized! You don't have permission to access this action!`
+                    : 'Unauthorized! Please login to access this route!';
+                res.status(401).json(message);
+            }
             return;
         }
         await User.create({
