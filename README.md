@@ -17,7 +17,6 @@ bun i
 bun run start
 ```
 
-
 ```
 cd .. # Move to root respository
 cd frontend
@@ -35,7 +34,24 @@ bun run dev
 http://localhost:8080
 
 ### Frontend:
+Click link below or http://localhost:3000 to open.
 
-
-http://localhost:3000
-http://localhost:3000/dashboard
+- General:
+    - [x] Narbar
+    - [ ] Footer
+    - [x] Cart
+- [Homepage](http://localhost:3000):
+    - [x] Banner
+    - [ ] Sort & Filter
+    - [x] Product
+    - [x] Pagination
+- [Login](http://localhost:3000/login):
+    - [x] Basic interface
+- [Register](http://localhost:3000/register):
+    - [x] Basic interface
+- [Product](http://localhost:3000/product):
+    - [x] Basic interface
+- [Dashboard](http://localhost:3000/dashboard):
+    - [ ] Customize
+- Others:
+    - Need more page
