@@ -1,7 +1,7 @@
 import {HomeDescription} from "@/components/login/home-description";
 import {LoginForm} from "@/components/login/login-form";
 import {Spacer} from "@nextui-org/react";
-import {RegisterForm} from "@/components/register/register-form";
+import {RegisterForm} from "@/components/form/register-form";
 
 export default function LoginPage() {
     return (

@@ -1,6 +1,7 @@
 import ProductItem from "@/components/product/product-item";
-import CustomButton from "@/components/product/button";
+// import CustomButton from "@/components/product/button";
 import {ArrowLeftIcon} from "@nextui-org/shared-icons";
+import {Button} from "@nextui-org/button";
 
 let product = {
     // id: string;
@@ -20,13 +21,13 @@ export default function ProductPage() {
     return (
         //returning button
         <div>
-            <CustomButton className={"left-5 bg-blue-900 fixed"}>
-                <ArrowLeftIcon/>
-            </CustomButton>
+            {/*< className={"left-5 bg-blue-900 fixed"}>*/}
+            {/*    <ArrowLeftIcon/>*/}
+            {/*</>*/}
+            <Button isIconOnly={true} startContent={<ArrowLeftIcon/>}>
+            </Button>
 
             <ProductItem product={product}/>
-
         </div>
-
     )
 }

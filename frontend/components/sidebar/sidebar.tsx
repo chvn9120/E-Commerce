@@ -1,130 +1,129 @@
+"use client";
+
+import {Image, Listbox, ListboxItem, ListboxSection, Spacer} from "@nextui-org/react";
+import clsx from "clsx";
+import NextLink from "next/link";
 import React from "react";
-import { Sidebar } from "./sidebar.styles";
-import { Avatar, Tooltip } from "@nextui-org/react";
-import { CompaniesDropdown } from "./companies-dropdown";
-import { HomeIcon } from "../icons/sidebar/home-icon";
-import { PaymentsIcon } from "../icons/sidebar/payments-icon";
-import { BalanceIcon } from "../icons/sidebar/balance-icon";
-import { AccountsIcon } from "../icons/sidebar/accounts-icon";
-import { CustomersIcon } from "../icons/sidebar/customers-icon";
-import { ProductsIcon } from "../icons/sidebar/products-icon";
-import { ReportsIcon } from "../icons/sidebar/reports-icon";
-import { DevIcon } from "../icons/sidebar/dev-icon";
-import { ViewIcon } from "../icons/sidebar/view-icon";
-import { SettingsIcon } from "../icons/sidebar/settings-icon";
-import { CollapseItems } from "./collapse-items";
-import { SidebarItem } from "./sidebar-item";
-import { SidebarMenu } from "./sidebar-menu";
-import { FilterIcon } from "../icons/sidebar/filter-icon";
-import { useSidebarContext } from "../layout/layout-context";
-import { ChangeLogIcon } from "../icons/sidebar/changelog-icon";
-import { usePathname } from "next/navigation";
+import {AccountsIcon} from "@/components/icons/sidebar/accounts-icon";
 
-export const SidebarWrapper = () => {
-  const pathname = usePathname();
-  const { collapsed, setCollapsed } = useSidebarContext();
+// icon, title, isActive, href =
+let icon = <AccountsIcon/>;
+let title = "Accounts";
+let isActive = true;
+let href = "/accounts";
 
-  return (
-    <aside className="h-screen z-[202] sticky top-0">
-      {collapsed ? (
-        <div className={Sidebar.Overlay()} onClick={setCollapsed} />
-      ) : null}
-      <div
-        className={Sidebar({
-          collapsed: collapsed,
-        })}
-      >
-        <div className={Sidebar.Header()}>
-          <CompaniesDropdown />
+
+export default function Sidebar() {
+    return (
+        <div
+            className="relative flex h-full w-72 max-w-[288px] flex-1 flex-col !border-r-small border-divider p-6 transition-[transform,opacity,margin] duration-250 ease-in-out">
+            <Image
+                className={"rounded-full w-8 h-8 bg-default text-default-foreground ring-2 ring-offset-2 ring-offset-background dark:ring-offset-background-dark ring-default"}
+                src={"https://i.pravatar.cc/150?u=a04258114e29026708c"}
+                alt={"avatar"}
+                width={32}
+                height={32}
+            >
+
+            </Image>
+
+
+            <div className="flex flex-col"><p className="text-small font-medium text-default-600">
+                Nam Tong
+            </p>
+                <p
+                    className="text-tiny text-default-400">ADMIN </p>
+            </div>
+
+
+            <Spacer y={3}/>
+
+
+            <div>
+                <Listbox variant="flat" aria-label="Listbox menu with sections">
+                    <ListboxSection title="Main">
+                        <ListboxItem
+                            key={"Home"}
+                        >
+                            <NextLink href="/" className="text-default-900 active:bg-none max-w-full">
+                                <div
+                                    className="flex gap-2 w-full min-h-[44px] h-full items-center px-3.5 rounded-xl cursor-pointer transition-all duration-150 active:scale-[0.98]">
+                                    <span className="text-default-900">Home</span>
+                                </div>
+                            </NextLink>
+                        </ListboxItem>
+                        {/* Dashboard */}
+                        <ListboxItem
+                            key={"Dashboard"}
+                            className="hover:bg-default-100"
+                        >
+                            <NextLink href="/" className="text-default-900 active:bg-none max-w-full">
+                                <div
+                                    className="flex gap-2 w-full min-h-[44px] h-full items-center px-3.5 rounded-xl cursor-pointer transition-all duration-150 active:scale-[0.98]">
+                                    <span className="text-default-900">Dashboard</span>
+                                </div>
+                            </NextLink>
+                        </ListboxItem>
+
+                    </ListboxSection>
+
+
+                    {/*Admin*/}
+                    <ListboxSection
+                        className={""}
+                        title="Admin managerment" showDivider>
+                        {/*Account*/}
+                        <ListboxItem
+                            className={clsx(
+                                isActive
+                                    ? "bg-transparent [&_svg_path]:fill-primary-500"
+                                    : "hover:bg-default-100",
+                                "flex gap-2 w-full min-h-[44px] h-full items-center px-3.5 rounded-xl cursor-pointer transition-all duration-150 active:scale-[0.98]"
+                            )}
+                            // className="hover:bg-default-100"
+                            key="view"
+                            startContent={icon}
+                        >
+                            <NextLink
+                                href={href}
+                                className="text-default-900 active:bg-none max-w-full"
+                            >
+                                <div
+
+                                >
+                                    <span className="text-default-900">{title}</span>
+                                </div>
+                            </NextLink>
+                        </ListboxItem>
+
+                        {/*Product*/}
+                        <ListboxItem
+                            key="view"
+                            className="hover:bg-default-100"
+                            // startContent={<ViewIcon className={cn(iconClasses, "text-default-500")} />}
+                        >
+                            <NextLink href="/products" className="text-default-900 active:bg-none max-w-full">
+                                <div
+                                    className="flex gap-2 w-full min-h-[44px] h-full items-center px-3.5 rounded-xl cursor-pointer transition-all duration-150 active:scale-[0.98]">
+                                    {/*<ViewIcon className="text-default-500"/>*/}
+                                    <span className="text-default-900">Products</span>
+                                </div>
+                            </NextLink>
+                        </ListboxItem>
+                    </ListboxSection>
+                    <ListboxSection title="Danger zone">
+                        <ListboxItem
+                            key="delete"
+                            className="text-danger"
+                            color="danger"
+                            description="Permanently delete the file"
+                            // startContent={<DeleteDocumentIcon className={cn(iconClasses, "text-danger")} />}
+                        >
+                            Delete file
+                        </ListboxItem>
+                    </ListboxSection>
+                </Listbox>
+            </div>
         </div>
-        <div className="flex flex-col justify-between h-full">
-          <div className={Sidebar.Body()}>
-            <SidebarItem
-              title="Home"
-              icon={<HomeIcon />}
-              isActive={pathname === "/"}
-              href="/"
-            />
-            <SidebarMenu title="Main Menu">
-              <SidebarItem
-                isActive={pathname === "/accounts"}
-                title="Accounts"
-                icon={<AccountsIcon />}
-                href="accounts"
-              />
-              <SidebarItem
-                isActive={pathname === "/payments"}
-                title="Payments"
-                icon={<PaymentsIcon />}
-              />
-              <CollapseItems
-                icon={<BalanceIcon />}
-                items={["Banks Accounts", "Credit Cards", "Loans"]}
-                title="Balances"
-              />
-              <SidebarItem
-                isActive={pathname === "/customers"}
-                title="Customers"
-                icon={<CustomersIcon />}
-              />
-              <SidebarItem
-                isActive={pathname === "/products"}
-                title="Products"
-                icon={<ProductsIcon />}
-              />
-              <SidebarItem
-                isActive={pathname === "/reports"}
-                title="Reports"
-                icon={<ReportsIcon />}
-              />
-            </SidebarMenu>
-
-            <SidebarMenu title="General">
-              <SidebarItem
-                isActive={pathname === "/developers"}
-                title="Developers"
-                icon={<DevIcon />}
-              />
-              <SidebarItem
-                isActive={pathname === "/view"}
-                title="View Test Data"
-                icon={<ViewIcon />}
-              />
-              <SidebarItem
-                isActive={pathname === "/settings"}
-                title="Settings"
-                icon={<SettingsIcon />}
-              />
-            </SidebarMenu>
-
-            <SidebarMenu title="Updates">
-              <SidebarItem
-                isActive={pathname === "/changelog"}
-                title="Changelog"
-                icon={<ChangeLogIcon />}
-              />
-            </SidebarMenu>
-          </div>
-          <div className={Sidebar.Footer()}>
-            <Tooltip content={"Settings"} color="primary">
-              <div className="max-w-fit">
-                <SettingsIcon />
-              </div>
-            </Tooltip>
-            <Tooltip content={"Adjustments"} color="primary">
-              <div className="max-w-fit">
-                <FilterIcon />
-              </div>
-            </Tooltip>
-            <Tooltip content={"Profile"} color="primary">
-              <Avatar
-                src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-                size="sm"
-              />
-            </Tooltip>
-          </div>
-        </div>
-      </div>
-    </aside>
-  );
-};
+    )
+}

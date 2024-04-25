@@ -1,41 +1,26 @@
-import {Chip, Tooltip, User} from "@nextui-org/react";
+import {Chip, Tooltip} from "@nextui-org/react";
 import React from "react";
 import {DeleteIcon} from "../icons/table/delete-icon";
 import {EditIcon} from "../icons/table/edit-icon";
 import {EyeIcon} from "../icons/table/eye-icon";
-import {users} from "./data";
+import {products} from "./data";
 
 interface Props {
-    user: (typeof users)[number];
+    product: (typeof products)[number];
     columnKey: string | React.Key;
 }
 
-export const RenderCell = ({user, columnKey}: Props) => {
+export const RenderCellProduct = ({product, columnKey}: Props) => {
     // @ts-ignore
-    const cellValue = user[columnKey];
+    const cellValue = product[columnKey];
     switch (columnKey) {
         case "name":
             return (
-                <User
-                    avatarProps={{
-                        src: "https://i.pravatar.cc/150?u=a04258114e29026702d",
-                    }}
-                    name={cellValue}
-                >
-                    {user.email}
-                </User>
+                <p>
+                    {cellValue}
+                </p>
             );
-        case "role":
-            return (
-                <div>
-                    <div>
-                        <span>{cellValue}</span>
-                    </div>
-                    <div>
-                        <span>{user.team}</span>
-                    </div>
-                </div>
-            );
+
         case "status":
             return (
                 <Chip
@@ -58,23 +43,23 @@ export const RenderCell = ({user, columnKey}: Props) => {
                 <div className="flex items-center gap-4 ">
                     <div>
                         <Tooltip content="Details">
-                            <button onClick={() => console.log("View user", user.id)}>
+                            <button onClick={() => console.log("View product", product.id)}>
                                 <EyeIcon size={20} fill="#979797"/>
                             </button>
                         </Tooltip>
                     </div>
                     <div>
-                        <Tooltip content="Edit user" color="secondary">
-                            <button onClick={() => console.log("Edit user", user.id)}>
+                        <Tooltip content="Edit product" color="secondary">
+                            <button onClick={() => console.log("Edit product", product.id)}>
                                 <EditIcon size={20} fill="#979797"/>
                             </button>
                         </Tooltip>
                     </div>
                     <div>
                         <Tooltip
-                            content="Delete user"
+                            content="Delete product"
                             color="danger"
-                            onClick={() => console.log("Delete user", user.id)}
+                            onClick={() => console.log("Delete product", product.id)}
                         >
                             <button>
                                 <DeleteIcon size={20} fill="#FF0080"/>
@@ -94,6 +79,17 @@ export const RenderCell = ({user, columnKey}: Props) => {
         // Color
         case "color":
             return <span>{cellValue}</span>;
+
+        // Price
+        case "price":
+            return <span>{cellValue}</span>;
+        //Description
+        case "description":
+            return <div className={"w-20"}>
+                <p className={"truncate hover:text-clip"}>
+                    {cellValue}
+                </p>
+            </div>;
 
         default:
             return cellValue;

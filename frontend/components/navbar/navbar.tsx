@@ -1,33 +1,15 @@
 'use client'; // This is a comment
 
-import {
-    Navbar,
-    NavbarBrand,
-    NavbarContent,
-    NavbarItem,
-    NavbarMenuToggle,
-    NavbarMenu,
-    NavbarMenuItem
-} from "@nextui-org/react";
-
-import {Input, Link} from "@nextui-org/react";
+import {Input, Link, Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu} from "@nextui-org/react";
 import React from "react";
 import {NotificationsDropdown} from "./notifications-dropdown";
 import {UserDropdown} from "./user-dropdown";
 import NextLink from "next/link";
-import {Logo} from "@/components/icons";
+import {GithubIcon, Logo, SearchIcon} from "@/components/icons";
 import {siteConfig} from "@/config/site";
 import clsx from "clsx";
 import {link as linkStyles} from "@nextui-org/theme";
 import {Kbd} from "@nextui-org/kbd";
-
-import {
-    TwitterIcon,
-    GithubIcon,
-    DiscordIcon,
-    HeartFilledIcon,
-    SearchIcon,
-} from "@/components/icons";
 import {CartDropdown} from "./cart";
 import {ThemeSwitch} from "@/components/theme-switch";
 
@@ -154,7 +136,7 @@ export const NavbarWrapper = ({children}: Props) => {
                     justify="end"
                     className="w-fit data-[justify=end]:flex-grow-0"
                 >
-                    <ThemeSwitch />
+                    <ThemeSwitch/>
 
 
                     {/*Cart item*/}

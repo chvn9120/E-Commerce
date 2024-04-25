@@ -1,8 +1,14 @@
 'use client'; // This is a comment
 
-import { title } from "@/components/primitives";
-import { Content } from "@/components/home/content";
+// import { Content } from "@/components/dashboard/content";
+
+import {Content} from "@/components/dashboard/content";
 
 export default function DashboardPage() {
-    return <Content />;
+    return (
+        <div>
+            123
+            <Content/>
+        </div>
+    );
 }

@@ -1,20 +1,20 @@
 import {Pagination, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow,} from "@nextui-org/react";
 import React from "react";
-import {columns, users} from "./data";
-import {RenderCell} from "./render-cell";
+import {products, products_columns} from "./data";
+import {RenderCellProduct} from "@/components/table/render-product-cell";
 
-export const TableWrapper = () => {
+export const TableProducts = () => {
     const [page, setPage] = React.useState(1);
     const rowsPerPage = 4;
 
-    const pages = Math.ceil(users.length / rowsPerPage);
+    const pages = Math.ceil(products.length / rowsPerPage);
 
     const items = React.useMemo(() => {
         const start = (page - 1) * rowsPerPage;
         const end = start + rowsPerPage;
 
-        return users.slice(start, end);
-    }, [page, users]);
+        return products.slice(start, end);
+    }, [page, products]);
 
     return (
         <div className=" w-full flex flex-col gap-4">
@@ -37,12 +37,14 @@ export const TableWrapper = () => {
                     wrapper: "min-h-[222px]",
                 }}
             >
-                <TableHeader columns={columns}>
+                <TableHeader columns={products_columns}>
                     {(column) => (
                         <TableColumn
                             key={column.uid}
+                            className={column.uid === "description" ? "w-10 overflow-hidden text-ellipsis whitespace-nowrap " : ""}
                             hideHeader={column.uid === "actions"}
-                            align={column.uid === "actions" ? "center" : "start"}
+                            align={column.uid === "actions" ? "center" : "start"
+                        }
                         >
                             {column.name}
                         </TableColumn>
@@ -53,7 +55,7 @@ export const TableWrapper = () => {
                         <TableRow>
                             {(columnKey) => (
                                 <TableCell>
-                                    {RenderCell({user: item, columnKey: columnKey})}
+                                    {RenderCellProduct({product: item, columnKey: columnKey})}
                                 </TableCell>
                             )}
                         </TableRow>
