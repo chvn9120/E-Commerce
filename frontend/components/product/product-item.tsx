@@ -17,6 +17,7 @@ import {PaymentsIcon} from "@/components/icons/sidebar/payments-icon";
 import {CartIcon} from "@nextui-org/shared-icons";
 import SwiperThumbnail from "@/components/sidebar/product-thumbnail";
 import PurchaseForm from "@/components/form/purchase-form";
+import {CustomRadio} from "@/components/radio/color-radio";
 
 interface Product {
     id: string;
@@ -56,12 +57,23 @@ const ProductItem: React.FC<ProductItemProps> = ({product}) => {
                         <span className="text-default-600">5 reviews</span>
                     </div>
 
+                    {/*<label className="group relative inline-flex items-center justify-start cursor-pointer p-2">*/}
+                    {/*    <div className="absolute h-1 w-1 overflow-hidden clip-[rect(0)]">*/}
+                    {/*        <input aria-labelledby=":r6:" aria-describedby="react-aria3129229857-:r3:" tabIndex={0}*/}
+                    {/*               type="radio" value="gray" title="" className="h-1 w-1"/>*/}
+                    {/*    </div>*/}
+                    {/*    <span*/}
+                    {/*        className="pointer-events-none h-8 w-8 rounded-full border border-black border-opacity-10 transition-transform group-data-[pressed=true]:scale-90 bg-[rgb(63,63,70)]">*/}
+                    {/*    </span>*/}
+                    {/*</label>*/}
+
                     {/*Choose attribute*/}
                     <div className="relative flex flex-col gap-2 ml-1 mt-6">
-                        <RadioGroup orientation={"horizontal"} className="">
-                            <Radio value="1">Color 1</Radio>
-                            <Radio value="2">Color 2</Radio>
-                            <Radio value="3">Color 3 </Radio>
+                        <RadioGroup orientation={"horizontal"}
+                                    className={"flex flex-col flex-wrap data-[orientation=horizontal]:flex-row gap-2"}>
+                            <CustomRadio value="1">Red</CustomRadio>
+                            <CustomRadio value="2">Green</CustomRadio>
+                            <CustomRadio value="3">Blue</CustomRadio>
                         </RadioGroup>
                     </div>
 

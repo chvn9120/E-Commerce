@@ -11,6 +11,7 @@ import {
 } from "@nextui-org/react";
 import React from "react";
 import { DarkModeSwitch } from "./darkmodeswitch";
+import {Link} from "@nextui-org/link";
 
 export const UserDropdown = () => {
   return (
@@ -37,10 +38,9 @@ export const UserDropdown = () => {
           <p>zoey@example.com</p>
         </DropdownItem>
         <DropdownItem key="settings">My Settings</DropdownItem>
-        <DropdownItem key="team_settings">Team Settings</DropdownItem>
-        <DropdownItem key="analytics">Analytics</DropdownItem>
-        <DropdownItem key="system">System</DropdownItem>
-        <DropdownItem key="configurations">Configurations</DropdownItem>
+        <DropdownItem key={"cart"} >
+          <Link href={"/cart"}>My Cart</Link>
+        </DropdownItem>
         <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
         <DropdownItem key="logout" color="danger" className="text-danger ">
           Log Out

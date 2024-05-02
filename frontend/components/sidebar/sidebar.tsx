@@ -5,6 +5,7 @@ import clsx from "clsx";
 import NextLink from "next/link";
 import React from "react";
 import {AccountsIcon} from "@/components/icons/sidebar/accounts-icon";
+import {ProductsIcon} from "@/components/icons/sidebar/products-icon";
 
 // icon, title, isActive, href =
 let icon = <AccountsIcon/>;
@@ -57,7 +58,7 @@ export default function Sidebar() {
                             key={"Dashboard"}
                             className="hover:bg-default-100"
                         >
-                            <NextLink href="/" className="text-default-900 active:bg-none max-w-full">
+                            <NextLink href="/dashboard" className="text-default-900 active:bg-none max-w-full">
                                 <div
                                     className="flex gap-2 w-full min-h-[44px] h-full items-center px-3.5 rounded-xl cursor-pointer transition-all duration-150 active:scale-[0.98]">
                                     <span className="text-default-900">Dashboard</span>
@@ -100,6 +101,7 @@ export default function Sidebar() {
                         <ListboxItem
                             key="view"
                             className="hover:bg-default-100"
+                            startContent={<ProductsIcon/>}
                             // startContent={<ViewIcon className={cn(iconClasses, "text-default-500")} />}
                         >
                             <NextLink href="/products" className="text-default-900 active:bg-none max-w-full">

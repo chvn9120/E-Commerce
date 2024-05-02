@@ -74,10 +74,8 @@ export const AddProduct = () => {
         // "Gray",
         // "Black",
     ]
-
     const [sizes, setSizes] = React.useState(new Set(initialSize));
     const [colors, setColors] = React.useState(new Set(initialColor));
-
 
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
@@ -163,7 +161,12 @@ export const AddProduct = () => {
                                         placeholder="Select Size"
                                         selectedKeys={sizes}
                                         className="max-w-xs"
-                                        onSelectionChange={setSizes}
+                                        // @ts-ignore
+                                        onSelectionChange={
+                                            (keys: any) => {
+                                                setSizes(new Set(keys as string[]));
+                                            }
+                                        }
                                     >
                                         {sizeValue.map((size) => (
                                             <SelectItem key={size.value} value={size.value}>
@@ -191,7 +194,11 @@ export const AddProduct = () => {
                                         placeholder="Select Color"
                                         selectedKeys={colors}
                                         className="max-w-xs"
-                                        onSelectionChange={setColors}
+                                        onSelectionChange={
+                                            (keys: any): any => {
+                                                setColors(new Set(keys as string[]));
+                                            }
+                                        }
                                     >
                                         {colorValue.map((color) => (
                                             <SelectItem key={color.value} value={color.value}>
