@@ -18,6 +18,7 @@ export interface ProvidersProps {
 
 export function Providers({children, themeProps, layout}: ProvidersProps) {
     const router = useRouter(); // This is the router
+    // @ts-ignore
     return <NextUIProvider>
         <NextThemesProvider defaultTheme="system" attribute="class" {...themeProps}>
             {children}

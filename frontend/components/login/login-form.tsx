@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {Formik} from 'formik';
 import {Input, Spacer, Link, Button, Divider, Checkbox} from '@nextui-org/react';
@@ -89,7 +89,7 @@ export const LoginForm: React.FC = () => {
                         {/* Dont have account */}
                         <Spacer y={1}/>
                         <div className="flex-row justify-center">
-                            <span>Don't have an account? </span>
+                            <span>Dont have an account? </span>
                             <Link href={"/register"} color="primary">Sign up</Link>
                         </div>
 

@@ -9,6 +9,7 @@ import ButtonGroup from "@/components/filterbar/button-group";
 import CardItem from "@/components/product-grid/card-items";
 import MyPagination from "@/components/product-grid/Pagination";
 import {NavbarWrapper} from "@/components/navbar/navbar";
+import SwiperComp from "@/components/swiper/swiper";
 
 
 export default function Home() {
@@ -18,7 +19,7 @@ export default function Home() {
 
             {/*Banner*/}
             <div className="flex items-center justify-center ">
-                <Swiper/>
+                <SwiperComp/>
             </div>
 
             {/*Breadcumb*/}

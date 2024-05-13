@@ -1,4 +1,4 @@
-"use client"; // <===== REQUIRED
+'use client'; // <===== REQUIRED
 
 import React from "react";
 
@@ -17,11 +17,23 @@ let images = [
     '/src/anh-2-phong-tro-rong.jpg',
     '/src/anh-3-phan-loai-theo-cong-nang.jpg',
 ]
-
-export default () => {
+const SwiperComp = () => {
     return (
         <div className="p-2 z-30 ">
             <SwiperComponent images={images}/>
         </div>
     );
-};
+
+}
+
+SwiperComp.displayName = 'Swiper';
+
+// export default () => {
+//     return (
+//         <div className="p-2 z-30 ">
+//             <SwiperComponent images={images}/>
+//         </div>
+//     );
+// };
+
+export default SwiperComp;

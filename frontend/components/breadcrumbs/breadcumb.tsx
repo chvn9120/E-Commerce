@@ -1,9 +1,10 @@
 'use client'; // <===== REQUIRED
 
 import React from "react";
-import {Breadcrumbs, BreadcrumbItem} from "@nextui-org/react";
+import {BreadcrumbItem, Breadcrumbs} from "@nextui-org/react";
 
-export default () => {
+//add displat name
+const BreadcrumbComponent = () => {
     return (
         <Breadcrumbs>
             <BreadcrumbItem>Trang chủ</BreadcrumbItem>
@@ -12,3 +13,7 @@ export default () => {
         </Breadcrumbs>
     );
 }
+
+BreadcrumbComponent.displayName = 'BreadcrumbComponent';
+
+export default BreadcrumbComponent;
