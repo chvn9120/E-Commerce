@@ -1,6 +1,6 @@
 'use client'; // This is a comment
 
-import Swiper from "@/components/swiper/swiper";
+import SwiperComp from "@/components/swiper/swiper";
 import Breadcumb from "@/components/breadcrumbs/breadcumb";
 import MyCard from "@/components/filterbar/card";
 import React from "react";
@@ -9,7 +9,6 @@ import ButtonGroup from "@/components/filterbar/button-group";
 import CardItem from "@/components/product-grid/card-items";
 import MyPagination from "@/components/product-grid/Pagination";
 import {NavbarWrapper} from "@/components/navbar/navbar";
-import SwiperComp from "@/components/swiper/swiper";
 
 
 export default function Home() {
@@ -34,10 +33,8 @@ export default function Home() {
                     <ButtonGroup/>
 
                     <Select>
-                        {/*<MySelectItem>*/}
-                        {/*    /!* You can pass children here *!/*/}
-                        {/*    <p>Child content</p>*/}
-                        {/*</MySelectItem>*/}
+                        {/* You can pass children here */}
+                        <p></p>
                     </Select>
                 </MyCard>
             </div>
