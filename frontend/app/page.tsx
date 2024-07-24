@@ -9,11 +9,16 @@ import ButtonGroup from "@/components/filterbar/button-group";
 import CardItem from "@/components/product-grid/card-items";
 import MyPagination from "@/components/product-grid/Pagination";
 import {NavbarWrapper} from "@/components/navbar/navbar";
+import {useRouter} from "next/router";
 
 
 export default function Home() {
+    // const router = useRouter();
+
     return (
-        <div>
+        <div
+            className={"bg-background bg-radial"}
+        >
             <NavbarWrapper/>
 
             {/*Banner*/}
@@ -40,47 +45,106 @@ export default function Home() {
             </div>
 
             {/*Grid of Product*/}
-            <div className="flex place-content-center mt-6">
-                <div className="grid grid-cols-4 grid-rows-2 gap-5">
-                    <CardItem>
-                        <h1>
-                            Paris
-                        </h1>
-                        <p>Price: 123$</p>
+            <div className="relative flex min-h-dvh flex-col bg-background bg-radial pt-16">
+                <div className="flex items-center h-auto dark justify-center p-4">
+                    <div
+                        className={"my-auto flex h-full w-full max-w-7xl flex-col gap-2 p-4"}
+                    >
+                        <div
+                            className={"grid w-full grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"}
+                        >
+                            <CardItem
+                                // router={router}
+                            >
+                                <h1>
+                                    Paris
+                                </h1>
+                                <p>Price: 123$</p>
 
-                    </CardItem>
+                            </CardItem>
 
-                    <CardItem>
-                        <p>Product 2</p>
-                    </CardItem>
+                            <CardItem
+                                // router={router}
+                            >
+                                <h1>
+                                    Paris
+                                </h1>
+                                <p>Price: 123$</p>
 
-                    <CardItem>
-                        <p>Product 3</p>
-                    </CardItem>
+                            </CardItem>
 
-                    <CardItem>
-                        <p>Product 4</p>
+                            <CardItem
+                                // router={router}
+                            >
+                                <h1>
+                                    Paris
+                                </h1>
+                                <p>Price: 123$</p>
 
-                    </CardItem>
+                            </CardItem>
 
-                    <CardItem>
-                        <p>Product 5</p>
 
-                    </CardItem>
+                            <CardItem
+                                // router={router}
+                            >
+                                <h1>
+                                    Paris
+                                </h1>
+                                <p>Price: 123$</p>
 
-                    <CardItem>
-                        <p>Product 6</p>
-                    </CardItem>
+                            </CardItem>
+
+                            <CardItem
+                                // router={router}
+                            >
+                                <h1>
+                                    Paris
+                                </h1>
+                                <p>Price: 123$</p>
+
+                            </CardItem>
+
+                            <CardItem
+                                // router={router}
+                            >
+                                <h1>
+                                    Paris
+                                </h1>
+                                <p>Price: 123$</p>
+
+                            </CardItem>
+
+                            <CardItem
+                                // router={router}
+                            >
+                                <h1>
+                                    Paris
+                                </h1>
+                                <p>Price: 123$</p>
+
+                            </CardItem>
+
+                            <CardItem
+                                // router={router}
+                            >
+                                <h1>
+                                    Paris
+                                </h1>
+                                <p>Price: 123$</p>
+
+                            </CardItem>
+                        </div>
+
+                    </div>
+
                 </div>
 
             </div>
 
-            <div className="flex items-center justify-center"
-                 style={{marginTop: '20px'}}
-            >
+            <div className="flex items-center justify-center mb-14">
                 <MyPagination/>
             </div>
-
         </div>
+
     );
 }

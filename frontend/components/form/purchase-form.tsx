@@ -1,12 +1,13 @@
 import {Input} from "@nextui-org/input";
 import {Radio, RadioGroup} from "@nextui-org/react";
 import React from "react";
+import PaymentMethod from "@/components/payment-method/payment-method";
 
 export default function PurchaseForm() {
     return (
-        <div className="flex items-center dark h-screen justify-center p-4">
+        <div className="flex items-center dark h-auto text-center mx-auto">
             <div className="flex w-full max-w-2xl py-8">
-                <form className="flex flex-col gap-4 py-8">
+                <form className="flex flex-col gap-5 py-8">
                     {/*Email*/}
                     <div
                         className="group flex flex-col w-full group relative justify-end">
@@ -139,15 +140,17 @@ export default function PurchaseForm() {
                     </div>
 
                     {/*Payment method*/}
-                    <div className="relative flex flex-col gap-2 ml-1 mt-3">
-                                                        <span
-                                                            className="relative text-foreground-500">Payment method</span>
-                        <RadioGroup orientation={"horizontal"} className="">
-                            <Radio value="1">Credit Card</Radio>
-                            <Radio value="2">Paypal</Radio>
-                            <Radio value="3">Other </Radio>
-                        </RadioGroup>
-                    </div>
+                    {/*<div className="relative flex flex-col gap-2 ml-1 mt-3">*/}
+                    {/*                                    <span*/}
+                    {/*                                        className="relative text-foreground-500">Payment method</span>*/}
+                    {/*    <RadioGroup orientation={"horizontal"} className="">*/}
+                    {/*        <Radio value="1">Credit Card</Radio>*/}
+                    {/*        <Radio value="2">Paypal</Radio>*/}
+                    {/*        <Radio value="3">Other </Radio>*/}
+                    {/*    </RadioGroup>*/}
+                    {/*</div>*/}
+                    <PaymentMethod className="w-[420px]"/>
+
                     {/*Card number*/}
                     <div
                         className="group flex flex-col w-full group relative justify-end">

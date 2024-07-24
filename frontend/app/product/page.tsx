@@ -16,6 +16,8 @@ import {
     Textarea,
     useDisclosure
 } from "@nextui-org/react";
+import Breadcumb from "@/components/breadcrumbs/breadcumb";
+import React from "react";
 
 let product = {
     // id: string;
@@ -41,11 +43,15 @@ export default function ProductPage() {
             {/*< className={"left-5 bg-blue-900 fixed"}>*/}
             {/*    <ArrowLeftIcon/>*/}
             {/*</>*/}
-            <Button isIconOnly={true} startContent={<ArrowLeftIcon/>}>
-            </Button>
+            {/*Breadcumb*/}
+            <div className="p-4">
+                <Breadcumb/>
+            </div>
 
             <ProductItem product={product}/>
 
+
+            {/* Review */}
             <div className={"flex items-center justify-center mt-6"}>
                 <div
                     className={"mx-auto w-full max-w-6xl px-2 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-12 lg:gap-x-12 lg:px-6"}>

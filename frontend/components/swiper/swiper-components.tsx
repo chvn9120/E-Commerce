@@ -26,11 +26,16 @@ const SwiperComponent: React.FC<SwiperComponentProps> = ({images}) => {
             onSlideChange={() => console.log('slide change')}
         >
             {images.map((image, index) => (
-                <SwiperSlide className="" key={index}>
+                <SwiperSlide className="flex items-center justify-center" key={index}>
                     <Image
-                        className="overflow-visible"
+                        width={800}
+                        height={300}
+                        shadow={"lg"}
+                        srcSet={""}
+                        loading={"lazy"}
+                        className="w-full h-full object-cover"
                         isBlurred
-                        isZoomed
+                        // isZoomed
                         // width={240}
                         src={image}
                         alt="NextUI Album Cover"

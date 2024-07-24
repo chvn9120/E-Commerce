@@ -24,16 +24,16 @@ let product = {
 export default function CartPage() {
     return (
         //returning button
-        <div className="flex items-center dark h-screen justify-center p-4">
-            <div className="flex w-full max-w-5xl flex-col lg:flex-row lg:gap-8">
+        <div className="flex items-center dark h-auto justify-center p-4">
+            <div className="flex w-full max-w-7xl flex-col lg:flex-row lg:gap-8">
                 {/*Ship and purchase*/}
-                <div className="w-full">
+                <div className="flex w-full justify-center mx-auto text-center">
                     <PurchaseForm/>
                 </div>
 
                 {/*Review and modify*/}
                 <div
-                    className="w-full mt-6 rounded-medium bg-content2 px-2 py-4 dark:bg-content1 md:px-6 md:py-8 lg:w-[340px] lg:flex-none">
+                    className="w-full h-fit mt-6 rounded-medium bg-content2 px-2 py-4 dark:bg-content1 md:px-6 md:py-8 lg:w-[340px] lg:flex-none">
                     <div className={"flex flex-col"}>
                         <h2 className="text-2xl font-semibold text-default-900">Review and modify</h2>
                         <Spacer y={2}/>

@@ -1,58 +1,30 @@
 'use client'; // This is a comment
 
 import {
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownSection,
-  DropdownTrigger,
-  NavbarItem,
+    Dropdown,
+    DropdownItem,
+    DropdownMenu,
+    DropdownSection,
+    DropdownTrigger,
+    NavbarItem, Popover, PopoverContent, PopoverTrigger,
 } from "@nextui-org/react";
 import React from "react";
 import { NotificationIcon } from "../icons/navbar/notificationicon";
+import {Button} from "@nextui-org/button";
+import {Input} from "@nextui-org/input";
+import NotificationCard from "@/components/notification-card/notification-card";
 
 export const NotificationsDropdown = () => {
   return (
-    <Dropdown placement="bottom-end">
-      <DropdownTrigger>
-        <NavbarItem>
-          <NotificationIcon />
-        </NavbarItem>
-      </DropdownTrigger>
-      <DropdownMenu className="w-80" aria-label="Avatar Actions">
-        <DropdownSection title="Notificacions">
-          <DropdownItem
-            classNames={{
-              base: "py-2",
-              title: "text-base font-semibold",
-            }}
-            key="1"
-            description="Sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim."
-          >
-            📣 Edit your information
-          </DropdownItem>
-          <DropdownItem
-            key="2"
-            classNames={{
-              base: "py-2",
-              title: "text-base font-semibold",
-            }}
-            description="Sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim."
-          >
-            🚀 Say goodbye to paper receipts!
-          </DropdownItem>
-          <DropdownItem
-            key="3"
-            classNames={{
-              base: "py-2",
-              title: "text-base font-semibold",
-            }}
-            description="Sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim."
-          >
-            📣 Edit your information
-          </DropdownItem>
-        </DropdownSection>
-      </DropdownMenu>
-    </Dropdown>
+      <Popover placement="bottom" showArrow offset={10}>
+          <PopoverTrigger>
+              <NavbarItem>
+                    <NotificationIcon/>
+              </NavbarItem>
+          </PopoverTrigger>
+          <PopoverContent>
+              <NotificationCard/>
+          </PopoverContent>
+      </Popover>
   );
 };

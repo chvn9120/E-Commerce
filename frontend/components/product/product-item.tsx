@@ -9,15 +9,16 @@ import {
     ModalContent,
     ModalFooter,
     ModalHeader,
-    Radio,
-    RadioGroup,
     useDisclosure
 } from "@nextui-org/react";
 import {PaymentsIcon} from "@/components/icons/sidebar/payments-icon";
 import {CartIcon} from "@nextui-org/shared-icons";
 import SwiperThumbnail from "@/components/sidebar/product-thumbnail";
 import PurchaseForm from "@/components/form/purchase-form";
-import {CustomRadio} from "@/components/radio/color-radio";
+import ColorRadio from "@/components/radio/color-radio";
+import SizeRadio from "@/components/radio/size-radio";
+
+// import RadioCustom from "@/components/radio/color-radio";
 
 interface Product {
     id: string;
@@ -33,7 +34,6 @@ interface ProductItemProps {
 
 const ProductItem: React.FC<ProductItemProps> = ({product}) => {
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
-
 
     return (
         <div className="">
@@ -57,24 +57,10 @@ const ProductItem: React.FC<ProductItemProps> = ({product}) => {
                         <span className="text-default-600">5 reviews</span>
                     </div>
 
-                    {/*<label className="group relative inline-flex items-center justify-start cursor-pointer p-2">*/}
-                    {/*    <div className="absolute h-1 w-1 overflow-hidden clip-[rect(0)]">*/}
-                    {/*        <input aria-labelledby=":r6:" aria-describedby="react-aria3129229857-:r3:" tabIndex={0}*/}
-                    {/*               type="radio" value="gray" title="" className="h-1 w-1"/>*/}
-                    {/*    </div>*/}
-                    {/*    <span*/}
-                    {/*        className="pointer-events-none h-8 w-8 rounded-full border border-black border-opacity-10 transition-transform group-data-[pressed=true]:scale-90 bg-[rgb(63,63,70)]">*/}
-                    {/*    </span>*/}
-                    {/*</label>*/}
 
                     {/*Choose attribute*/}
                     <div className="relative flex flex-col gap-2 ml-1 mt-6">
-                        <RadioGroup orientation={"horizontal"}
-                                    className={"flex flex-col flex-wrap data-[orientation=horizontal]:flex-row gap-2"}>
-                            <CustomRadio value="1">Red</CustomRadio>
-                            <CustomRadio value="2">Green</CustomRadio>
-                            <CustomRadio value="3">Blue</CustomRadio>
-                        </RadioGroup>
+                        <ColorRadio/>
                     </div>
 
 
@@ -83,19 +69,23 @@ const ProductItem: React.FC<ProductItemProps> = ({product}) => {
 
                     <div className="mt-6 flex flex-col gap-1">
                         <div className="mb-4 flex items-center gap-2 text-default-700">
-                            <p className="text-default-800">
-                                Free shipping for beautiful girls
-                            </p>
+                            <div className={"flex flex-row gap-2"}>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em"
+                                     viewBox="0 0 32 32">
+                                    <path fill="currentColor"
+                                          d="M0 6v2h19v15h-6.156c-.446-1.719-1.992-3-3.844-3c-1.852 0-3.398 1.281-3.844 3H4v-5H2v7h3.156c.446 1.719 1.992 3 3.844 3c1.852 0 3.398-1.281 3.844-3h8.312c.446 1.719 1.992 3 3.844 3c1.852 0 3.398-1.281 3.844-3H32v-8.156l-.063-.157l-2-6L29.72 10H21V6zm1 4v2h9v-2zm20 2h7.281L30 17.125V23h-1.156c-.446-1.719-1.992-3-3.844-3c-1.852 0-3.398 1.281-3.844 3H21zM2 14v2h6v-2zm7 8c1.117 0 2 .883 2 2s-.883 2-2 2s-2-.883-2-2s.883-2 2-2m16 0c1.117 0 2 .883 2 2s-.883 2-2 2s-2-.883-2-2s.883-2 2-2"></path>
+                                </svg>
+                                <p>
+                                    Free shipping for beautiful girls
+                                </p>
+                            </div>
                         </div>
+
 
                         <div
                             className="relative flex flex-col gap-1"
                         >
-                            <RadioGroup orientation={"horizontal"} className="">
-                                <Radio value="1">Size 1</Radio>
-                                <Radio value="2">Size 2</Radio>
-                                <Radio value="3">Size 3</Radio>
-                            </RadioGroup>
+                            <SizeRadio/>
                         </div>
                     </div>
 
@@ -133,11 +123,28 @@ const ProductItem: React.FC<ProductItemProps> = ({product}) => {
                         <Button className="basis-2/5 bg-secondary" startContent={<CartIcon/>}>Add to cart </Button>
                     </div>
 
-                    <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+                    <Modal
+                        size={"xl"}
+                        placement={"bottom-center"}
+                        isOpen={isOpen}
+                        onOpenChange={onOpenChange}
+                        scrollBehavior={"inside"}
+                        backdrop={"blur"}
+                        isDismissable={false}
+                        isKeyboardDismissDisabled={true}
+                        classNames={{
+                            body: "",
+                            backdrop: "bg-[#292f46]/50 backdrop-opacity-40",
+                            base: "text-center border-[#292f46] bg-[#19172c] dark:bg-[#19172c] text-[#a8b0d3]",
+                            header: "border-b-[1px] border-[#292f46]",
+                            footer: "border-t-[1px] border-[#292f46]",
+                            closeButton: "hover:bg-white/5 active:bg-white/10",
+                        }}
+                    >
                         <ModalContent>
                             {(onClose) => (
                                 <>
-                                    <ModalHeader className="flex flex-col gap-2">Purcharge</ModalHeader>
+                                    <ModalHeader>Purcharge</ModalHeader>
                                     <ModalBody>
                                         <PurchaseForm/>
                                     </ModalBody>

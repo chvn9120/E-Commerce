@@ -1,15 +1,16 @@
 "use client";
 
 import type {RadioGroupProps} from "@nextui-org/react";
+import {RadioGroup} from "@nextui-org/react";
 
 import React from "react";
-import {RadioGroup} from "@nextui-org/react";
 
 import {cn} from "./cn";
 
-import ColorRadioItem, {RatingValueEnum} from "./color-radio-item";
+import {RatingValueEnum} from "./color-radio-item";
+import SizeRadioItem from "@/components/radio/size-radio-item";
 
-export default function ColorRadio({classNames, ...props}: RadioGroupProps) {
+export default function SizeRadio({classNames, ...props}: RadioGroupProps) {
     const [value, setValue] = React.useState<RatingValueEnum | string>(RatingValueEnum.GOOD);
 
     return (
@@ -26,10 +27,10 @@ export default function ColorRadio({classNames, ...props}: RadioGroupProps) {
             size="lg"
             onValueChange={setValue}
         >
-            <ColorRadioItem value={RatingValueEnum.BAD} />
-            <ColorRadioItem value={RatingValueEnum.NEUTRAL} />
-            <ColorRadioItem value={RatingValueEnum.GOOD} />
-            <ColorRadioItem value={RatingValueEnum.GREAT} />
+            <SizeRadioItem value={RatingValueEnum.BAD}/>
+            <SizeRadioItem value={RatingValueEnum.NEUTRAL}/>
+            <SizeRadioItem value={RatingValueEnum.GOOD}/>
+            <SizeRadioItem value={RatingValueEnum.GREAT}/>
         </RadioGroup>
     );
 }

@@ -34,6 +34,7 @@ bun run dev
 http://localhost:8080
 
 ### Frontend:
+
 Click link below or http://localhost:3000 to open.
 
 - General:
@@ -55,3 +56,11 @@ Click link below or http://localhost:3000 to open.
     - [ ] Customize
 - Others:
     - Need more page
+
+### Tauri:
+
+- Fisrt uncomment this code in `frontend/next.config.js`
+
+```js
+// output: 'export', // tauri
+```

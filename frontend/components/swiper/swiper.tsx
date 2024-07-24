@@ -13,9 +13,9 @@ import SwiperComponent from "@/components/swiper/swiper-components";
 
 //Image array of local image
 let images = [
-    '/src/anh-1-phong-tro-nho.jpg',
-    '/src/anh-2-phong-tro-rong.jpg',
-    '/src/anh-3-phan-loai-theo-cong-nang.jpg',
+    '/src/swiper1.jpg',
+    '/src/swiper2.jpg',
+    '/src/swiper3.jpg',
 ]
 const SwiperComp = () => {
     return (
@@ -27,13 +27,5 @@ const SwiperComp = () => {
 }
 
 SwiperComp.displayName = 'Swiper';
-
-// export default () => {
-//     return (
-//         <div className="p-2 z-30 ">
-//             <SwiperComponent images={images}/>
-//         </div>
-//     );
-// };
 
 export default SwiperComp;
