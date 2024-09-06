@@ -1,39 +1,50 @@
-# Next.js & NextUI Template
+# Next.js Application
 
-This is a template for creating applications using Next.js 13 (app directory) and NextUI (v2).
+This is a Next.js application that includes a product grid, a swiper component, and various other UI elements.
 
-## Technologies Used
+## Getting Started
 
-- [Next.js 13](https://nextjs.org/docs/getting-started)
-- [NextUI v2](https://nextui.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Tailwind Variants](https://tailwind-variants.org)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Framer Motion](https://www.framer.com/motion/)
-- [next-themes](https://github.com/pacocoursey/next-themes)
+### Prerequisites
 
-## How to Use
+- Node.js (v14.x or later)
+- npm (v6.x or later)
 
-### Use the template with create-next-app
+### Installation
 
-To create a new project based on this template using `create-next-app`, run the following command:
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd <repository-directory>
+    ```
+2. Install the dependencies:
+3. ```bash
+   npm install
+   ```
+4. Start the development server:
+   ```bash
+    npm run dev
+    ```
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+6. To build the application for production, run:
+   ```bash
+   npm run build
+   ```
+7. To start the production server, run:
+   ```bash
+    npm run start
+    ```
+8. To run the linter, run:
+9. ```bash
+   npm run lint
+   ```
+10. To run the tests, run:
+11. ```bash
+    npm run test
+    ```
+
+### Tauri build
+- Change to `output: 'export', // use for tauri only`
 
 ```bash
-npx create-next-app -e https://github.com/nextui-org/next-app-template
+bun run tauri build
 ```
-
-### Install dependencies
-
-```bash
-npm install
-```
-
-### Run the development server
-
-```bash
-npm run dev
-```
-
-## License
-
-Licensed under the [MIT license](https://github.com/nextui-org/next-app-template/blob/main/LICENSE).

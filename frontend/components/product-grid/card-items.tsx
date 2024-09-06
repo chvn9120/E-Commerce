@@ -6,8 +6,8 @@ import {Image} from "@nextui-org/react";
 import {Button} from "@nextui-org/button";
 import {CartIcon} from "@nextui-org/shared-icons";
 import {InfoIcon} from "@/components/icons/accounts/info-icon";
+import NextImage from "next/image";
 import Link from "next/link";
-import {NextRouter, useRouter} from "next/router";
 
 interface CardProps {
     children: React.ReactNode;
@@ -17,7 +17,7 @@ interface CardProps {
 const CardItem: React.FC<CardProps> = ({
                                            children,
                                            // router
-}) => {
+                                       }) => {
 
     // const handleCartClick = (e: any) => {
     //     e.preventDefault()
@@ -37,12 +37,17 @@ const CardItem: React.FC<CardProps> = ({
                 <div
                 >
                     <Image
+                        as={NextImage}
                         className="relative z-10 opacity-0 shadow-black/5 data-[loaded=true]:opacity-100 shadow-none object-cover transform transition-transform-opacity motion-reduce:transition-none !duration-300 rounded-large aspect-square w-full hover:scale-110"
                         src={'/src/1.jpeg'}
                         isBlurred
                         isZoomed
+                        quality={75}
+                        alt={'Image'}
+                        layout={'responsive'}
+                        width={300}
+                        height={300}
                     >
-
                     </Image>
 
                 </div>
