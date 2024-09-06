@@ -9,8 +9,6 @@ import User from '../models/User.js';
 import Role from '../models/Role.js';
 import Permission from '../models/Permission.js';
 
-import isAdminstator from '../middlewares/IsAdministrator.js';
-
 const PostOrder = async (req, res, next) => {
     const { user_id, ship_fee, payment_method } = req.body;
     // Step 1: Calculate the total cart
@@ -96,7 +94,6 @@ const PostRegister = async (req, res, next) => {
             return;
         }
         if (role_id !== undefined) {
-            // Add authorize
             /*
              *Requirements:
              - Have to logged in.
