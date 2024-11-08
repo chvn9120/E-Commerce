@@ -1,21 +1,15 @@
 /** @type {import('next').NextConfig} */
+const isProd = process.env.NODE_ENV === "production"
 const nextConfig = {
-    reactStrictMode: true, //
-    // output: 'export', // use for tauri only
+    reactStrictMode: false, //
+    // output: 'export', // use for tauri & zalo
     output: 'standalone', // use for docker
 
     images: {
         // domains: ['localhost'],
         formats: ['image/webp'],
     },
-    async rewrites() {
-        return [
-        {
-            source: '/api/:path*',
-            destination: 'http://localhost:3000/api/:path*',
-        },
-        ]
-    },
+    // basePath: isProd ? "/zapps/<APP_ID>" : undefined,
 }
 
 module.exports = nextConfig
